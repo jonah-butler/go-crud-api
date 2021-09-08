@@ -8,16 +8,26 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
-	//"os"
+	"os"
 	//"github.com/joho/godotenv"
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
 )
 
 func initDatabase() {
-	var err error
-	dsn := "host=localhost user=postgres password=Porkpie666 dbname=go-test port=5432 sslmode=disable"
+	err := godotenv.Load()
+	if err != nil {
+		panic("Error loading .env file")
+	}
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	name := os.Getenv("DB_NAME")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASS")
+
+	dsn := "host=" + host + " user=" + user + " password=" + password + " dbname=" + name + " port=" + port + " sslmode=disable"
 	db.DBConn, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("error connecting to database")
