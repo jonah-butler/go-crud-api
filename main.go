@@ -8,9 +8,8 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
-	"os"
-	//"github.com/joho/godotenv"
 	"fmt"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -44,13 +43,5 @@ func main() {
 	routes.LandingRoutes(app)
 	userRoutes.SetupUserRoutes(app)
 
-	// app.Get("/", func(c *fiber.Ctx) error {
-	// user := Users{Id: 2, Email: "test@test.com", Password: "testyotest"}
-	// // db.First(&user)
-	// db.Select("Id", "Email", "Password").Create(&user)
-	// fmt.Println("result is ", user)
-	// 	fmt.Println(db)
-	// 	return c.SendString("yo got it")
-	// })
 	app.Listen(":8000")
 }
