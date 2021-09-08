@@ -4,13 +4,13 @@ import (
 	db "go-vue-auth/db"
 
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 
 	f "fmt"
 )
 
 type User struct {
-	gorm.Model
+	// gorm.Model
+	Id       int64  `json:"id"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
@@ -20,6 +20,7 @@ func getAllUsers(c *fiber.Ctx) error {
 	var users []User
 	db.Find(&users)
 	f.Println(users)
+	f.Println(users[0].Email)
 	return c.SendString("Hello from all Users")
 }
 
